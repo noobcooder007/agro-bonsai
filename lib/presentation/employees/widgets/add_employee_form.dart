@@ -1,61 +1,104 @@
 import 'package:flutter/material.dart';
 
+import 'package:agro_bonsai/domain/models/employee.dart';
+
 class AddEmployeeForm extends StatefulWidget {
-  const AddEmployeeForm({super.key});
+  final Function(Employee) function;
+
+  const AddEmployeeForm({super.key, required this.function});
 
   @override
   State<AddEmployeeForm> createState() => _AddEmployeeFormState();
 }
 
 class _AddEmployeeFormState extends State<AddEmployeeForm> {
+  final _formKey = GlobalKey<FormState>();
+  final firstNameTextController = TextEditingController();
+  final firstLastnameTextController = TextEditingController();
+  final secondLastnameTextController = TextEditingController();
+  late final DateTime birthday;
+
+  @override
+  void dispose() {
+    firstNameTextController.dispose();
+    firstLastnameTextController.dispose();
+    secondLastnameTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
+      key: _formKey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
               'Añadir empleado',
               style: TextStyle(fontSize: 20.0),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
+            const SizedBox(
+              height: 20.0,
+            ),
+            TextFormField(
               textCapitalization: TextCapitalization.words,
+              controller: firstNameTextController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Nombre(s)'),
                   hintText: 'Ingresa el nombre'),
               autovalidateMode: AutovalidateMode.onUserInteraction,
+              autofocus: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Campo obligatorio';
+                }
+                return null;
+              },
+              textInputAction: TextInputAction.next,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
+            const SizedBox(
+              height: 20.0,
+            ),
+            TextFormField(
               textCapitalization: TextCapitalization.words,
+              controller: firstLastnameTextController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Apelido paterno'),
                   hintText: 'Ingresa el apellido paterno'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Campo obligatorio';
+                }
+                return null;
+              },
+              textInputAction: TextInputAction.next,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
+            const SizedBox(
+              height: 20.0,
+            ),
+            TextFormField(
               textCapitalization: TextCapitalization.words,
+              controller: secondLastnameTextController,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   label: Text('Apelido materno'),
                   hintText: 'Ingresa el apellido materno'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Campo obligatorio';
+                }
+                return null;
+              },
+              textInputAction: TextInputAction.next,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InputDatePickerFormField(
+            const SizedBox(
+              height: 20.0,
+            ),
+            InputDatePickerFormField(
               fieldLabelText: 'Fecha de cumpleaños',
               fieldHintText: 'Selecciona una fecha',
               errorInvalidText: 'Formato invalido',
@@ -65,31 +108,50 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
               keyboardType: TextInputType.datetime,
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
+              onDateSaved: (value) {
+                birthday = value;
+              },
             ),
-          ),
-          Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SwitchListTile.adaptive(
-                  value: true,
-                  title: const Text('Activo'),
-                  onChanged: (value) {})),
-          const SizedBox(
-            height: 20.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+            const SizedBox(
+              height: 20.0,
+            ),
+            const SwitchListTile.adaptive(
+                value: true, title: Text('Activo'), onChanged: null),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FilledButton.icon(
                   icon: const Icon(Icons.save_outlined),
                   label: const Text('Guardar'),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      final employee = Employee(
+                          pkiId: null,
+                          fcFirstName: firstNameTextController.text,
+                          fcFirstLastName: firstLastnameTextController.text,
+                          fcSecondLastName: secondLastnameTextController.text,
+                          fdBirthday: birthday,
+                          fdCreatedAt: DateTime.now(),
+                          fiIsActive: true);
+                      widget.function(employee);
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Empleado añadido con exito')));
+                      setState(() {});
+                    }
+                  },
                 ),
               ],
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 40.0,
+            )
+          ],
+        ),
       ),
     );
   }

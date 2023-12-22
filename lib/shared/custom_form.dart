@@ -16,7 +16,6 @@ class _CustomFormState extends State<CustomForm> {
       initialChildSize: 1.0,
       minChildSize: 0.8,
       maxChildSize: 1.0,
-      expand: true,
       builder: (context, scrollController) => SingleChildScrollView(
         controller: scrollController,
         child:

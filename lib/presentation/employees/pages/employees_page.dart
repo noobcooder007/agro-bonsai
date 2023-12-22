@@ -1,3 +1,4 @@
+import 'package:agro_bonsai/domain/models/employee.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class EmployeesPage extends StatefulWidget {
 class _EmployeesPageState extends State<EmployeesPage> {
   @override
   Widget build(BuildContext context) {
-    final employees = context.watch<EmployeeProvider>().employees;
+    final employeesProvider = context.watch<EmployeeProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Empleados'),
@@ -26,7 +27,7 @@ class _EmployeesPageState extends State<EmployeesPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ...employees.map((e) => CustomListTile(
+            ...employeesProvider.employees.map((e) => CustomListTile(
                     leading: Text(e.fcFirstName[0].toString()),
                     trailing: const Icon(Icons.keyboard_arrow_right_outlined),
                     title: Text(
@@ -47,8 +48,13 @@ class _EmployeesPageState extends State<EmployeesPage> {
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10.0),
                         topRight: Radius.circular(10.0))),
+                isDismissible: false,
                 context: context,
-                builder: (_) => const CustomForm(child: AddEmployeeForm()));
+                builder: (_) => CustomForm(
+                        child: AddEmployeeForm(
+                      function: (Employee employee) =>
+                          employeesProvider.addEmployee(employee),
+                    )));
           }),
     );
   }

@@ -9,7 +9,7 @@ Employee employeeFromJson(String str) => Employee.fromJson(json.decode(str));
 String employeeToJson(Employee data) => json.encode(data.toJson());
 
 class Employee {
-  int pkiId;
+  int? pkiId;
   String fcFirstName;
   String fcFirstLastName;
   String fcSecondLastName;
