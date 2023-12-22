@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/pages/salary/salary_page.dart';
-import 'package:agro_bonsai/pages/history/history_page.dart';
-import 'package:agro_bonsai/pages/personal/personal_page.dart';
-import 'package:agro_bonsai/pages/register/register_page.dart';
+import 'package:agro_bonsai/presentation/salary/pages/pages/salary/salary_page.dart';
+import 'package:agro_bonsai/presentation/history/pages/history/history_page.dart';
+import 'package:agro_bonsai/presentation/personal/pages/personal/personal_page.dart';
+import 'package:agro_bonsai/presentation/register/pages/register/register_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

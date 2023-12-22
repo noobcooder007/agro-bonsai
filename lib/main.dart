@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:agro_bonsai/theme/color_schemes.dart';
 
-import 'package:agro_bonsai/pages/home/home_page.dart';
+import 'package:agro_bonsai/presentation/home/pages/home/home_page.dart';
 
 void main() {
   runApp(const MyApp());

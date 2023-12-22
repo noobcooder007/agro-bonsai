@@ -1,5 +1,5 @@
 import 'package:agro_bonsai/helpers/current_date.dart';
-import 'package:agro_bonsai/widgets/custom_list_tile.dart';
+import 'package:agro_bonsai/shared/custom_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class HistoryPage extends StatelessWidget {

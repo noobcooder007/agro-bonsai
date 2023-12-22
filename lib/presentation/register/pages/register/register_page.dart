@@ -1,8 +1,8 @@
-import 'package:agro_bonsai/helpers/current_date.dart';
-import 'package:agro_bonsai/widgets/custom_form.dart';
-import 'package:agro_bonsai/widgets/custom_bottom_sheet.dart';
-import 'package:agro_bonsai/widgets/custom_list_tile.dart';
 import 'package:flutter/material.dart';
+
+import 'package:agro_bonsai/helpers/current_date.dart';
+import 'package:agro_bonsai/shared/custom_form.dart';
+import 'package:agro_bonsai/shared/custom_list_tile.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -32,10 +32,12 @@ class RegisterPage extends StatelessWidget {
           icon: const Icon(Icons.add_outlined),
           onPressed: () {
             showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0))),
                 context: context,
-                builder: (_) => const CustomBottomSheet(
-                      form: CustomForm(),
-                    ));
+                builder: (_) => const CustomForm());
           }),
     );
   }
