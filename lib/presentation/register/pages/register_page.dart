@@ -37,7 +37,7 @@ class RegisterPage extends StatelessWidget {
                         topLeft: Radius.circular(10.0),
                         topRight: Radius.circular(10.0))),
                 context: context,
-                builder: (_) => const CustomForm());
+                builder: (_) => const CustomForm(child: Placeholder()));
           }),
     );
   }

@@ -30,22 +30,5 @@ class CustomListTile extends StatelessWidget {
         onTap: () {},
       ),
     );
-    // return Card(
-    //   child: ListTile(
-    //     titleAlignment: ListTileTitleAlignment.center,
-    //     leading: const CircleAvatar(
-    //       child: Text('J'),
-    //     ),
-    //     contentPadding:
-    //         const EdgeInsets.symmetric(horizontal: 28.0, vertical: 8.0),
-    //     title: const Text('Juan Manuel Tejeda Torres'),
-    //     subtitle: const Text('26 años - jornada por horas'),
-    //     isThreeLine: true,
-    //     trailing: IconButton.filledTonal(
-    //         onPressed: () {},
-    //         icon: const Icon(Icons.keyboard_arrow_right_outlined)),
-    //     onTap: () {},
-    //   ),
-    // );
   }
 }

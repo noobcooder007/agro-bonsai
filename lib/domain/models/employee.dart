@@ -13,8 +13,8 @@ class Employee {
   String fcFirstName;
   String fcFirstLastName;
   String fcSecondLastName;
-  String fdBirthday;
-  String fdCreatedAt;
+  DateTime fdBirthday;
+  DateTime fdCreatedAt;
   bool fiIsActive;
 
   Employee({
