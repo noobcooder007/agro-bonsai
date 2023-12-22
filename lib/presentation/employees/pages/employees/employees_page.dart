@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:agro_bonsai/shared/custom_form.dart';
 import 'package:agro_bonsai/shared/custom_list_tile.dart';
 
-class PersonalPage extends StatelessWidget {
-  const PersonalPage({super.key});
+class EmployeesPage extends StatelessWidget {
+  const EmployeesPage({super.key});
 
   @override
   Widget build(BuildContext context) {

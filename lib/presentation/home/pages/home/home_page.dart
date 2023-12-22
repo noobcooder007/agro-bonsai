@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/presentation/salary/pages/pages/salary/salary_page.dart';
-import 'package:agro_bonsai/presentation/history/pages/history/history_page.dart';
-import 'package:agro_bonsai/presentation/personal/pages/personal/personal_page.dart';
-import 'package:agro_bonsai/presentation/register/pages/register/register_page.dart';
+import '../../../presentation.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -34,7 +31,7 @@ class HomePage extends StatelessWidget {
           body: const TabBarView(children: <Widget>[
             HistoryPage(),
             RegisterPage(),
-            PersonalPage(),
+            EmployeesPage(),
             SalaryPage(),
           ]),
         ));
