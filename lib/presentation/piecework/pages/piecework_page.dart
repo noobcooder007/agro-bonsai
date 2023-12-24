@@ -2,6 +2,7 @@ import 'package:agro_bonsai/helpers/current_date.dart';
 import 'package:agro_bonsai/providers/employees/employee_provider.dart';
 import 'package:agro_bonsai/shared/custom_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final pieceworkProvider = context.watch<PieceworkProvider>();
     final employeeProvider = context.watch<EmployeeProvider>();
 
@@ -27,25 +29,35 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: const Text('Registro diario'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...pieceworkProvider.pieceworks.map((e) => CustomListTile(
-                    leading: const Icon(Icons.person_pin_outlined),
-                    trailing: const Icon(Icons.keyboard_arrow_right_outlined),
-                    title: Text(e.fullName),
-                    subtitle: [
-                      switch (e.fcTypePiecework) {
-                        TypePiecework.piece =>
-                          const Text('Jornada por destajo'),
-                        TypePiecework.hours => const Text('Jornada por horas'),
-                        TypePiecework.none => Container()
-                      },
-                      Text(CustomFormatDate.parse(e.fdCreatedAt))
-                    ]))
-          ],
-        ),
-      ),
+      body: (pieceworkProvider.pieceworks.isEmpty)
+          ? Center(
+              heightFactor: 2.2,
+              child: SvgPicture.asset(
+                'assets/empty.svg',
+                height: size.height * 0.3,
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...pieceworkProvider.pieceworks.map((e) => CustomListTile(
+                          leading: const Icon(Icons.person_pin_outlined),
+                          trailing:
+                              const Icon(Icons.keyboard_arrow_right_outlined),
+                          title: Text(e.fullName),
+                          subtitle: [
+                            switch (e.fcTypePiecework) {
+                              TypePiecework.piece =>
+                                const Text('Jornada por destajo'),
+                              TypePiecework.hours =>
+                                const Text('Jornada por horas'),
+                              TypePiecework.none => Container()
+                            },
+                            Text(CustomFormatDate.parse(e.fdCreatedAt))
+                          ]))
+                ],
+              ),
+            ),
       floatingActionButton: FloatingActionButton.extended(
           label: const Text('Añadir registro'),
           icon: const Icon(Icons.add_outlined),

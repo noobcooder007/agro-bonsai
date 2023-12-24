@@ -1,5 +1,6 @@
 import 'package:agro_bonsai/domain/models/employee.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:provider/provider.dart';
 
@@ -19,26 +20,36 @@ class EmployeesPage extends StatefulWidget {
 class _EmployeesPageState extends State<EmployeesPage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final employeesProvider = context.watch<EmployeeProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Empleados'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ...employeesProvider.employees.map((e) => CustomListTile(
-                    leading: Text(e.fcFirstName[0].toString()),
-                    trailing: const Icon(Icons.keyboard_arrow_right_outlined),
-                    title: Text(
-                        '${e.fcFirstName} ${e.fcFirstLastName} ${e.fcSecondLastName}'),
-                    subtitle: [
-                      Text('${Utils.calculateYears(e.fdBirthday)} años'),
-                      const Text('Jornada completa')
-                    ]))
-          ],
-        ),
-      ),
+      body: (employeesProvider.employees.isEmpty)
+          ? Center(
+              heightFactor: 2.2,
+              child: SvgPicture.asset(
+                'assets/empty.svg',
+                height: size.height * 0.3,
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  ...employeesProvider.employees.map((e) => CustomListTile(
+                          leading: Text(e.fcFirstName[0].toString()),
+                          trailing:
+                              const Icon(Icons.keyboard_arrow_right_outlined),
+                          title: Text(
+                              '${e.fcFirstName} ${e.fcFirstLastName} ${e.fcSecondLastName}'),
+                          subtitle: [
+                            Text('${Utils.calculateYears(e.fdBirthday)} años'),
+                            const Text('Jornada completa')
+                          ]))
+                ],
+              ),
+            ),
       floatingActionButton: FloatingActionButton.extended(
           label: const Text('Añadir empleado'),
           icon: const Icon(Icons.person_add_outlined),
