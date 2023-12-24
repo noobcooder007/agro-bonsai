@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
             ]),
           ),
           body: const TabBarView(children: <Widget>[
-            HistoryPage(),
+            LogsPage(),
             RegisterPage(),
             EmployeesPage(),
             SalaryPage(),
