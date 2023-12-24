@@ -131,9 +131,11 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
                       _formKey.currentState!.save();
                       final employee = Employee(
                           pkiId: null,
-                          fcFirstName: firstNameTextController.text,
-                          fcFirstLastName: firstLastnameTextController.text,
-                          fcSecondLastName: secondLastnameTextController.text,
+                          fcFirstName: firstNameTextController.text.trim(),
+                          fcFirstLastName:
+                              firstLastnameTextController.text.trim(),
+                          fcSecondLastName:
+                              secondLastnameTextController.text.trim(),
                           fdBirthday: birthday,
                           fdCreatedAt: DateTime.now(),
                           fiIsActive: true);

@@ -16,7 +16,7 @@ class Piecework {
   int? pkiId;
   Employee fkiEmployee;
   TypePiecework fcTypePiecework;
-  int fiQuantity;
+  int? fiQuantity;
   DateTime fdCreatedAt;
   bool fiIsActive;
 

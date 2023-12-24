@@ -63,7 +63,7 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
                 ListTile(
                   title: const Text('Por destajo'),
                   leading: Radio<TypePiecework>(
-                    value: TypePiecework.hours,
+                    value: TypePiecework.piece,
                     groupValue: _typePiecework,
                     onChanged: (value) => setState(() {
                       _typePiecework = value!;
@@ -73,7 +73,7 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
                 ListTile(
                   title: const Text('Por horas'),
                   leading: Radio<TypePiecework>(
-                    value: TypePiecework.piece,
+                    value: TypePiecework.hours,
                     groupValue: _typePiecework,
                     onChanged: (value) => setState(() {
                       _typePiecework = value!;
@@ -85,21 +85,23 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
             const SizedBox(
               height: 20.0,
             ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              controller: quantityTextController,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  label: Text('Cantidad'),
-                  hintText: 'Ingresa una cantidad'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Campo obligatorio';
-                }
-                return null;
-              },
-              textInputAction: TextInputAction.next,
-            ),
+            (_typePiecework == TypePiecework.piece)
+                ? TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: quantityTextController,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        label: Text('Cantidad'),
+                        hintText: 'Ingresa una cantidad'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Campo obligatorio';
+                      }
+                      return null;
+                    },
+                    textInputAction: TextInputAction.done,
+                  )
+                : Container(),
             const SizedBox(
               height: 20.0,
             ),
@@ -120,9 +122,11 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
                       final piecework = Piecework(
                           pkiId: null,
                           fkiEmployee: selectedEmployee,
-                          fcTypePiecework: TypePiecework.piece,
+                          fcTypePiecework: _typePiecework,
                           fdCreatedAt: DateTime.now(),
-                          fiQuantity: int.parse(quantityTextController.text),
+                          fiQuantity: quantityTextController.text.isNotEmpty
+                              ? int.parse(quantityTextController.text)
+                              : null,
                           fiIsActive: true);
                       widget.function(piecework);
                       Navigator.of(context).pop();

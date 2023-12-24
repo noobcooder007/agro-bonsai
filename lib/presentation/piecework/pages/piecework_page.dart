@@ -35,7 +35,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     trailing: const Icon(Icons.keyboard_arrow_right_outlined),
                     title: Text(e.fullName),
                     subtitle: [
-                      Text('${e.fcTypePiecework}: ${e.fiQuantity}'),
+                      switch (e.fcTypePiecework) {
+                        TypePiecework.piece =>
+                          const Text('Jornada por destajo'),
+                        TypePiecework.hours => const Text('Jornada por horas'),
+                        TypePiecework.none => Container()
+                      },
                       Text(CustomFormatDate.parse(e.fdCreatedAt))
                     ]))
           ],
