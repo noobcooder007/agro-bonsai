@@ -46,4 +46,8 @@ class Employee {
         "fdCreatedAt": fdCreatedAt,
         "fiIsActive": fiIsActive,
       };
+
+  String get fullName {
+    return '$fcFirstName $fcFirstLastName $fcSecondLastName';
+  }
 }
