@@ -17,6 +17,7 @@ class AddPieceworkForm extends StatefulWidget {
 class _AddPieceworkFormState extends State<AddPieceworkForm> {
   final _formKey = GlobalKey<FormState>();
   final quantityTextController = TextEditingController();
+  TypePiecework _typePiecework = TypePiecework.none;
   late final Employee selectedEmployee;
 
   @override
@@ -57,10 +58,28 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
             const SizedBox(
               height: 20.0,
             ),
-            const Column(
+            Column(
               children: [
-                ListTile(),
-                ListTile(),
+                ListTile(
+                  title: const Text('Por destajo'),
+                  leading: Radio<TypePiecework>(
+                    value: TypePiecework.hours,
+                    groupValue: _typePiecework,
+                    onChanged: (value) => setState(() {
+                      _typePiecework = value!;
+                    }),
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Por horas'),
+                  leading: Radio<TypePiecework>(
+                    value: TypePiecework.piece,
+                    groupValue: _typePiecework,
+                    onChanged: (value) => setState(() {
+                      _typePiecework = value!;
+                    }),
+                  ),
+                ),
               ],
             ),
             const SizedBox(

@@ -6,7 +6,7 @@ import 'dart:convert';
 
 import 'package:agro_bonsai/domain/models/employee.dart';
 
-enum TypePiecework { hours, piece }
+enum TypePiecework { hours, piece, none }
 
 Piecework pieceworkFromJson(String str) => Piecework.fromJson(json.decode(str));
 
