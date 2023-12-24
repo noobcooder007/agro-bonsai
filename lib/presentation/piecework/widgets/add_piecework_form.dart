@@ -58,30 +58,20 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
             const SizedBox(
               height: 20.0,
             ),
-            Column(
-              children: [
-                ListTile(
-                  title: const Text('Por destajo'),
-                  leading: Radio<TypePiecework>(
-                    value: TypePiecework.piece,
-                    groupValue: _typePiecework,
-                    onChanged: (value) => setState(() {
+            RadioListTile(
+                title: const Text('Por destajo'),
+                value: TypePiecework.piece,
+                groupValue: _typePiecework,
+                onChanged: (value) => setState(() {
                       _typePiecework = value!;
-                    }),
-                  ),
-                ),
-                ListTile(
-                  title: const Text('Por horas'),
-                  leading: Radio<TypePiecework>(
-                    value: TypePiecework.hours,
-                    groupValue: _typePiecework,
-                    onChanged: (value) => setState(() {
+                    })),
+            RadioListTile(
+                title: const Text('Por horas'),
+                value: TypePiecework.hours,
+                groupValue: _typePiecework,
+                onChanged: (value) => setState(() {
                       _typePiecework = value!;
-                    }),
-                  ),
-                ),
-              ],
-            ),
+                    })),
             const SizedBox(
               height: 20.0,
             ),

@@ -51,6 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
           icon: const Icon(Icons.add_outlined),
           onPressed: () {
             showModalBottomSheet(
+                isDismissible: false,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10.0),
