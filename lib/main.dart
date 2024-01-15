@@ -1,3 +1,5 @@
+import 'package:agro_bonsai/presentation/screens/home/pages/home_page.dart';
+import 'package:agro_bonsai/presentation/screens/login/screen/login_page.dart';
 import 'package:agro_bonsai/providers/employees/employee_provider.dart';
 import 'package:agro_bonsai/providers/log/log_provider.dart';
 import 'package:agro_bonsai/providers/piecework/piecework_provider.dart';
@@ -5,7 +7,6 @@ import 'package:flutter/material.dart';
 
 import 'package:agro_bonsai/theme/color_schemes.dart';
 
-import 'package:agro_bonsai/presentation/screens/home/pages/home_page.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,9 +26,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => LogProvider()),
       ],
       child: MaterialApp(
+        initialRoute: 'home',
+        routes: {
+          'home': (_) => const HomePage(),
+          'login': (_) => const LoginPage()
+        },
         theme: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
         darkTheme: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
-        home: const HomePage(),
       ),
     );
   }
