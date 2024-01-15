@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:dio/dio.dart';
-
 import 'package:agro_bonsai/domain/repositories/auth_repository.dart';
 
 class AuthProvider with ChangeNotifier {
