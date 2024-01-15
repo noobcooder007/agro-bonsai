@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
+import 'package:agro_bonsai/providers/providers.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -21,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.watch<AuthProvider>();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -86,15 +91,21 @@ class _LoginPageState extends State<LoginPage> {
                         height: 12.0,
                       ),
                       FilledButton.icon(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            Navigator.of(context).pushNamed('home');
+                            final response = await authProvider.login(
+                                fcUsername: usernameTextController.text,
+                                fcPassword: passwordTextController.text);
+                            if (mounted && response) {
+                              Navigator.of(context).pushNamed('home');
+                            }
                           }
                         },
                         icon: const Icon(Icons.arrow_right_alt_outlined),
                         label: const Text('CONTINUAR'),
-                      )
+                      ),
+                      Text('token: ${authProvider.token}')
                     ],
                   ))
             ],

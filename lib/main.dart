@@ -1,13 +1,13 @@
-import 'package:agro_bonsai/presentation/screens/home/pages/home_page.dart';
-import 'package:agro_bonsai/presentation/screens/login/screen/login_page.dart';
-import 'package:agro_bonsai/providers/employees/employee_provider.dart';
-import 'package:agro_bonsai/providers/log/log_provider.dart';
-import 'package:agro_bonsai/providers/piecework/piecework_provider.dart';
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/theme/color_schemes.dart';
-
 import 'package:provider/provider.dart';
+
+import 'package:agro_bonsai/theme/color_schemes.dart';
+import 'package:agro_bonsai/providers/providers.dart';
+import 'package:agro_bonsai/infraestructure/datasources/web_auth_datasource_impl.dart';
+import 'package:agro_bonsai/infraestructure/repositories/web_auth_repository_impl.dart';
+import 'package:agro_bonsai/presentation/screens/login/screen/login_page.dart';
+import 'package:agro_bonsai/presentation/screens/home/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,9 +24,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => EmployeeProvider()),
         ChangeNotifierProvider(create: (_) => PieceworkProvider()),
         ChangeNotifierProvider(create: (_) => LogProvider()),
+        ChangeNotifierProvider(
+            create: (_) => AuthProvider(
+                authRepository:
+                    WebAuthRepository(authDatasource: WebAuthDatasource()))),
       ],
       child: MaterialApp(
-        initialRoute: 'home',
+        initialRoute: 'login',
         routes: {
           'home': (_) => const HomePage(),
           'login': (_) => const LoginPage()
