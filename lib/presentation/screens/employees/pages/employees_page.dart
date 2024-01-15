@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:agro_bonsai/domain/models/employee.dart';
+import 'package:agro_bonsai/domain/entities/employee.dart';
 import 'package:agro_bonsai/helpers/calculate_years.dart';
 import 'package:agro_bonsai/providers/employees/employee_provider.dart';
 import 'package:agro_bonsai/shared/custom_form.dart';

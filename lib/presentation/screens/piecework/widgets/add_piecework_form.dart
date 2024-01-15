@@ -1,7 +1,7 @@
-import 'package:agro_bonsai/domain/models/employee.dart';
+import 'package:agro_bonsai/domain/entities/employee.dart';
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/domain/models/piecework.dart';
+import 'package:agro_bonsai/domain/entities/piecework.dart';
 
 class AddPieceworkForm extends StatefulWidget {
   final Function(Piecework) function;

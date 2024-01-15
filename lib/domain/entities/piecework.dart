@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:agro_bonsai/domain/models/employee.dart';
+import 'package:agro_bonsai/domain/entities/employee.dart';
 
 enum TypePiecework { hours, piece, none }
 

@@ -9,7 +9,7 @@ import 'package:agro_bonsai/helpers/current_date.dart';
 import 'package:agro_bonsai/presentation/screens/piecework/widgets/add_piecework_form.dart';
 import 'package:agro_bonsai/providers/piecework/piecework_provider.dart';
 import 'package:agro_bonsai/shared/custom_form.dart';
-import 'package:agro_bonsai/domain/models/piecework.dart';
+import 'package:agro_bonsai/domain/entities/piecework.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

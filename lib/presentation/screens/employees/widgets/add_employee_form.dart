@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/domain/models/employee.dart';
+import 'package:agro_bonsai/domain/entities/employee.dart';
 
 class AddEmployeeForm extends StatefulWidget {
   final Function(Employee) function;
