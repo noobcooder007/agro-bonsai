@@ -9,7 +9,7 @@ import 'package:agro_bonsai/helpers/current_date.dart';
 import 'package:agro_bonsai/presentation/screens/piecework/widgets/add_piecework_form.dart';
 import 'package:agro_bonsai/providers/piecework/piecework_provider.dart';
 import 'package:agro_bonsai/shared/custom_form.dart';
-import 'package:agro_bonsai/domain/entities/piecework.dart';
+import 'package:agro_bonsai/domain/entities/pieceworks.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -48,6 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 )
               : Expanded(
                   child: ListView.builder(
+                      itemCount: pieceworkProvider.pieceworks.length,
                       itemBuilder: (context, index) => CustomListTile(
                               leading: const Icon(Icons.person_pin_outlined),
                               trailing: const Icon(

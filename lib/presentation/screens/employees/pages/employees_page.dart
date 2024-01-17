@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:agro_bonsai/domain/entities/employee.dart';
+import 'package:agro_bonsai/providers/providers.dart';
 import 'package:agro_bonsai/helpers/calculate_years.dart';
-import 'package:agro_bonsai/providers/employees/employee_provider.dart';
 import 'package:agro_bonsai/shared/custom_form.dart';
 import 'package:agro_bonsai/shared/custom_list_tile.dart';
+import 'package:agro_bonsai/domain/entities/employees.dart';
 import 'package:agro_bonsai/presentation/screens/employees/widgets/add_employee_form.dart';
 
 class EmployeesPage extends StatefulWidget {
@@ -22,7 +22,9 @@ class _EmployeesPageState extends State<EmployeesPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
+    final authProvider = context.watch<AuthProvider>();
     final employeesProvider = context.watch<EmployeeProvider>();
+    employeesProvider.getEmployees(authProvider.token);
 
     return Stack(children: [
       Column(
@@ -46,9 +48,10 @@ class _EmployeesPageState extends State<EmployeesPage> {
                 )
               : Expanded(
                   child: ListView.builder(
+                    itemCount: employeesProvider.employees.length,
                     itemBuilder: (context, index) => CustomListTile(
                         leading: Text(employeesProvider
-                            .employees[index].fcFirstName[0]
+                            .employees[index].fcFirstname[0]
                             .toString()),
                         trailing:
                             const Icon(Icons.keyboard_arrow_right_outlined),

@@ -1,7 +1,7 @@
-import 'package:agro_bonsai/domain/entities/employee.dart';
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/domain/entities/piecework.dart';
+import 'package:agro_bonsai/domain/entities/employees.dart';
+import 'package:agro_bonsai/domain/entities/pieceworks.dart';
 
 class AddPieceworkForm extends StatefulWidget {
   final Function(Piecework) function;
@@ -45,6 +45,10 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
                   border: OutlineInputBorder(),
                   label: Text('Empleado'),
                   hintText: 'Selecciona un empleado'),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w600,
+                  overflow: TextOverflow.ellipsis),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               autofocus: true,
               validator: (value) {

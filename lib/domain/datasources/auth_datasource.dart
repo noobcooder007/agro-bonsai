@@ -1,7 +1,5 @@
-import 'package:agro_bonsai/domain/entities/user.dart';
+import 'package:agro_bonsai/domain/entities/auth.dart';
 
 abstract class AuthDatasource {
-  Future<dynamic> login(
-      {required String fcUsername, required String fcPassword});
-  Future<dynamic> signup({required User user});
+  Future<Auth> login({required String fcUsername, required String fcPassword});
 }

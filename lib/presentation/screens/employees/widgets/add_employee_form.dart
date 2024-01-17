@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/domain/entities/employee.dart';
+import 'package:agro_bonsai/domain/entities/employees.dart';
 
 class AddEmployeeForm extends StatefulWidget {
   final Function(Employee) function;
@@ -131,10 +131,10 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
                       _formKey.currentState!.save();
                       final employee = Employee(
                           pkiId: null,
-                          fcFirstName: firstNameTextController.text.trim(),
-                          fcFirstLastName:
+                          fcFirstname: firstNameTextController.text.trim(),
+                          fcFirstLastname:
                               firstLastnameTextController.text.trim(),
-                          fcSecondLastName:
+                          fcSecondLastname:
                               secondLastnameTextController.text.trim(),
                           fdBirthday: birthday,
                           fdCreatedAt: DateTime.now(),

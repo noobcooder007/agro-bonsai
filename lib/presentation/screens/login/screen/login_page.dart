@@ -98,7 +98,8 @@ class _LoginPageState extends State<LoginPage> {
                                 fcUsername: usernameTextController.text,
                                 fcPassword: passwordTextController.text);
                             if (mounted && response) {
-                              Navigator.of(context).pushNamed('home');
+                              Navigator.of(context)
+                                  .pushReplacementNamed('home');
                             }
                           }
                         },

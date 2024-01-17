@@ -20,11 +20,11 @@ class AuthProvider with ChangeNotifier {
 
   Future<bool> login(
       {required String fcUsername, required String fcPassword}) async {
-    final response = await _authRepository.login(
+    final authResponse = await _authRepository.login(
         fcUsername: fcUsername, fcPassword: fcPassword);
-    _token = response.data['token'];
+    _token = authResponse.token;
     notifyListeners();
-    if (_token.isNotEmpty) {
+    if (authResponse.ok) {
       return true;
     } else {
       return false;

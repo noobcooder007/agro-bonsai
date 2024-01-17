@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:agro_bonsai/domain/entities/piecework.dart';
+import 'package:agro_bonsai/domain/entities/pieceworks.dart';
 
 class PieceworkProvider with ChangeNotifier {
   final List<Piecework> _pieceworks = List.empty(growable: true);
