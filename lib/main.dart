@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,8 @@ import 'package:agro_bonsai/infrastructure/repositories/web_auth_repository_impl
 import 'package:agro_bonsai/presentation/screens/login/screen/login_page.dart';
 import 'package:agro_bonsai/presentation/screens/home/pages/home_page.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 

@@ -1,3 +1,4 @@
+import 'package:agro_bonsai/shared/custom_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -97,9 +98,21 @@ class _LoginPageState extends State<LoginPage> {
                             final response = await authProvider.login(
                                 fcUsername: usernameTextController.text,
                                 fcPassword: passwordTextController.text);
-                            if (mounted && response) {
-                              Navigator.of(context)
-                                  .pushReplacementNamed('home');
+                            if (mounted) {
+                              if (response) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('home');
+                              } else {
+                                showAdaptiveDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return const CustomDialog(
+                                        title: 'Error',
+                                        content:
+                                            'Revisa tu conexión y los datos ingresados');
+                                  },
+                                );
+                              }
                             }
                           }
                         },

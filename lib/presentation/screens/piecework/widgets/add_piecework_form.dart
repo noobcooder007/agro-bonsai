@@ -38,8 +38,8 @@ class _AddPieceworkFormState extends State<AddPieceworkForm> {
             ),
             DropdownButtonFormField(
               items: [
-                ...widget.employees.map(
-                    (e) => DropdownMenuItem(value: e, child: Text(e.fullName)))
+                ...widget.employees.map((e) =>
+                    DropdownMenuItem(value: e, child: Text(e.getFullName())))
               ],
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),

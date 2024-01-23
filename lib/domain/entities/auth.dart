@@ -1,6 +1,6 @@
 class Auth {
   final bool ok;
-  final String token;
+  final String? token;
 
-  Auth({required this.ok, required this.token});
+  Auth({required this.ok, this.token});
 }

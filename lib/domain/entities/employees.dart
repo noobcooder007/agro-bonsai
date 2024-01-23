@@ -4,20 +4,20 @@ class Employee {
   final String fcFirstLastname;
   final String fcSecondLastname;
   final DateTime fdBirthday;
-  final DateTime fdCreatedAt;
+  final DateTime? fdCreatedAt;
   final bool fiIsActive;
 
   Employee({
-    required this.pkiId,
+    this.pkiId,
     required this.fcFirstname,
     required this.fcFirstLastname,
     required this.fcSecondLastname,
     required this.fdBirthday,
-    required this.fdCreatedAt,
+    this.fdCreatedAt,
     required this.fiIsActive,
   });
 
-  get fullName {
+  String getFullName() {
     return '$fcFirstname $fcFirstLastname $fcSecondLastname';
   }
 }

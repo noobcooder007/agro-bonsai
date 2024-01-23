@@ -15,4 +15,14 @@ class EmployeesMapper {
             fiIsActive: employee.fiIsActive))
         .toList();
   }
+
+  static Map<String, dynamic> toJson(Employee employee) {
+    return {
+      'fcFirstname': employee.fcFirstname,
+      'fcFirstLastname': employee.fcFirstLastname,
+      'fcSecondLastname': employee.fcSecondLastname,
+      'fdBirthday': employee.fdBirthday.toIso8601String(),
+      'fdCreatedAt': employee.fdCreatedAt?.toIso8601String()
+    };
+  }
 }

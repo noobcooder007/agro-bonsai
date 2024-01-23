@@ -9,31 +9,38 @@ class SalaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    return Stack(
-      children: [
-        Column(
-          children: [
-            Text(
-              'Ganancias',
-              style: TextStyle(fontSize: textTheme.titleLarge?.fontSize),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 1,
-                itemBuilder: (context, index) => CustomListTile(
-                  leading: const Text('J'),
-                  title: const Text('Juan Manuel Tejeda Torres'),
-                  subtitle: [
-                    const Text('\$1200.00'),
-                    Text(CustomFormatDate.parse(DateTime.now()))
-                  ],
-                  trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+    return SafeArea(
+      child: Stack(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 12.0),
+                child: Text(
+                  'Ganancias',
+                  style: TextStyle(fontSize: textTheme.titleLarge?.fontSize),
                 ),
               ),
-            ),
-          ],
-        )
-      ],
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 1,
+                  itemBuilder: (context, index) => CustomListTile(
+                    leading: const Text('J'),
+                    title: const Text('Juan Manuel Tejeda Torres'),
+                    subtitle: [
+                      const Text('\$1200.00'),
+                      Text(CustomFormatDate.parse(DateTime.now()))
+                    ],
+                    trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

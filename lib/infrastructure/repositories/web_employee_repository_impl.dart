@@ -7,7 +7,7 @@ class WebEmployeeRepository implements EmployeeRepository {
 
   WebEmployeeRepository({required this.employeeDatasource});
   @override
-  Future<bool> createEmployee(Employee employee, int createdBy, String token) {
+  Future<bool> createEmployee(Employee employee, String token) {
     return employeeDatasource.createEmployee(employee, token);
   }
 
@@ -27,7 +27,7 @@ class WebEmployeeRepository implements EmployeeRepository {
   }
 
   @override
-  Future<bool> updateEmployee(Employee employee, int createdBy, String token) {
+  Future<bool> updateEmployee(Employee employee, String token) {
     return employeeDatasource.updateEmployee(employee, token);
   }
 }

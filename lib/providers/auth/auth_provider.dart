@@ -22,7 +22,7 @@ class AuthProvider with ChangeNotifier {
       {required String fcUsername, required String fcPassword}) async {
     final authResponse = await _authRepository.login(
         fcUsername: fcUsername, fcPassword: fcPassword);
-    _token = authResponse.token;
+    _token = authResponse.token ?? '';
     notifyListeners();
     if (authResponse.ok) {
       return true;

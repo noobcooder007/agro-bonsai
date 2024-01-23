@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:agro_bonsai/shared/custom_dialog.dart';
 import 'package:agro_bonsai/domain/entities/employees.dart';
 
 class AddEmployeeForm extends StatefulWidget {
@@ -16,7 +17,7 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
   final firstNameTextController = TextEditingController();
   final firstLastnameTextController = TextEditingController();
   final secondLastnameTextController = TextEditingController();
-  late final DateTime birthday;
+  DateTime birthday = DateTime.now();
 
   @override
   void dispose() {
@@ -109,7 +110,7 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               onDateSaved: (value) {
-                birthday = value;
+                birthday = DateTime.utc(value.year);
               },
             ),
             const SizedBox(
@@ -126,7 +127,7 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
                 FilledButton.icon(
                   icon: const Icon(Icons.save_outlined),
                   label: const Text('Guardar'),
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       final employee = Employee(
@@ -137,13 +138,23 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
                           fcSecondLastname:
                               secondLastnameTextController.text.trim(),
                           fdBirthday: birthday,
-                          fdCreatedAt: DateTime.now(),
+                          fdCreatedAt: DateTime.utc(DateTime.now().year),
                           fiIsActive: true);
-                      widget.function(employee);
-                      Navigator.of(context).pop();
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text('Empleado añadido con exito')));
-                      setState(() {});
+                      final response = await widget.function(employee);
+                      if (mounted) {
+                        if (response) {
+                          Navigator.of(context).pop();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Empleado añadido con exito')));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => const CustomDialog(
+                                  title: 'Error',
+                                  content: 'No se pudo crear el empleado'));
+                        }
+                      }
                     }
                   },
                 ),

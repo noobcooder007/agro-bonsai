@@ -26,73 +26,75 @@ class _RegisterPageState extends State<RegisterPage> {
     final pieceworkProvider = context.watch<PieceworkProvider>();
     final employeeProvider = context.watch<EmployeeProvider>();
 
-    return Stack(children: [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-            child: Text(
-              'Registro diario',
-              style: TextStyle(fontSize: textTheme.titleLarge?.fontSize),
+    return SafeArea(
+      child: Stack(children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              child: Text(
+                'Registro diario',
+                style: TextStyle(fontSize: textTheme.titleLarge?.fontSize),
+              ),
             ),
-          ),
-          (pieceworkProvider.pieceworks.isEmpty)
-              ? Center(
-                  heightFactor: 2.2,
-                  child: SvgPicture.asset(
-                    'assets/empty.svg',
-                    height: size.height * 0.3,
+            (pieceworkProvider.pieceworks.isEmpty)
+                ? Center(
+                    heightFactor: 2.2,
+                    child: SvgPicture.asset(
+                      'assets/empty.svg',
+                      height: size.height * 0.3,
+                    ),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                        itemCount: pieceworkProvider.pieceworks.length,
+                        itemBuilder: (context, index) => CustomListTile(
+                                leading: const Icon(Icons.person_pin_outlined),
+                                trailing: const Icon(
+                                    Icons.keyboard_arrow_right_outlined),
+                                title: Text(pieceworkProvider
+                                    .pieceworks[index].fullName),
+                                subtitle: [
+                                  switch (pieceworkProvider
+                                      .pieceworks[index].fcTypePiecework) {
+                                    TypePiecework.piece =>
+                                      const Text('Jornada por destajo'),
+                                    TypePiecework.hours =>
+                                      const Text('Jornada por horas'),
+                                    TypePiecework.none => Container()
+                                  },
+                                  Text(CustomFormatDate.parse(pieceworkProvider
+                                      .pieceworks[index].fdCreatedAt))
+                                ])),
                   ),
-                )
-              : Expanded(
-                  child: ListView.builder(
-                      itemCount: pieceworkProvider.pieceworks.length,
-                      itemBuilder: (context, index) => CustomListTile(
-                              leading: const Icon(Icons.person_pin_outlined),
-                              trailing: const Icon(
-                                  Icons.keyboard_arrow_right_outlined),
-                              title: Text(
-                                  pieceworkProvider.pieceworks[index].fullName),
-                              subtitle: [
-                                switch (pieceworkProvider
-                                    .pieceworks[index].fcTypePiecework) {
-                                  TypePiecework.piece =>
-                                    const Text('Jornada por destajo'),
-                                  TypePiecework.hours =>
-                                    const Text('Jornada por horas'),
-                                  TypePiecework.none => Container()
-                                },
-                                Text(CustomFormatDate.parse(pieceworkProvider
-                                    .pieceworks[index].fdCreatedAt))
-                              ])),
-                ),
-        ],
-      ),
-      Positioned(
-        bottom: 16.0,
-        right: 16.0,
-        child: FloatingActionButton.extended(
-            label: const Text('Añadir registro'),
-            icon: const Icon(Icons.add_outlined),
-            onPressed: () {
-              showModalBottomSheet(
-                  isDismissible: false,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10.0),
-                          topRight: Radius.circular(10.0))),
-                  context: context,
-                  builder: (_) => CustomForm(
-                          child: AddPieceworkForm(
-                        employees: employeeProvider.employees,
-                        function: (Piecework piecework) =>
-                            pieceworkProvider.addPiecework(piecework),
-                      )));
-            }),
-      ),
-    ]);
+          ],
+        ),
+        Positioned(
+          bottom: 16.0,
+          right: 16.0,
+          child: FloatingActionButton.extended(
+              label: const Text('Añadir registro'),
+              icon: const Icon(Icons.add_outlined),
+              onPressed: () {
+                showModalBottomSheet(
+                    isDismissible: false,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0))),
+                    context: context,
+                    builder: (_) => CustomForm(
+                            child: AddPieceworkForm(
+                          employees: employeeProvider.employees,
+                          function: (Piecework piecework) =>
+                              pieceworkProvider.addPiecework(piecework),
+                        )));
+              }),
+        ),
+      ]),
+    );
 
     // return Scaffold(
     //   appBar: AppBar(
