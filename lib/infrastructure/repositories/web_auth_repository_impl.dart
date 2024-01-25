@@ -11,4 +11,9 @@ class WebAuthRepository implements AuthRepository {
   Future<Auth> login({required String fcUsername, required String fcPassword}) {
     return authDatasource.login(fcUsername: fcUsername, fcPassword: fcPassword);
   }
+
+  @override
+  Future<Auth> renew({required String token}) {
+    return authDatasource.renew(token: token);
+  }
 }

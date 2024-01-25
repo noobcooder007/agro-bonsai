@@ -14,7 +14,6 @@ class EmployeeProvider with ChangeNotifier {
     final employees = await _employeeRepository.getEmployees(token);
     _employees.clear();
     _employees.addAll(employees);
-    notifyListeners();
   }
 
   List<Employee> get employees {

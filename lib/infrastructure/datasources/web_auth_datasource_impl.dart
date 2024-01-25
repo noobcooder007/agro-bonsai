@@ -26,4 +26,23 @@ class WebAuthDatasource implements AuthDatasource {
       return auth;
     }
   }
+
+  @override
+  Future<Auth> renew({required String token}) async {
+    final baseUrl = dotenv.env['BASE_URL'];
+    try {
+      final response = await Dio().post('${baseUrl}auth/renew',
+          options: Options(
+              contentType: Headers.jsonContentType,
+              responseType: ResponseType.json,
+              headers: {'x-token': token}));
+      final responseData = AuthResponse.fromJson(response.data);
+      final auth = AuthMapper.authResponseToAuthEntity(responseData);
+      return auth;
+    } on DioException catch (e) {
+      final responseData = AuthResponse.fromJson(e.response?.data);
+      final auth = AuthMapper.authResponseToAuthEntity(responseData);
+      return auth;
+    }
+  }
 }

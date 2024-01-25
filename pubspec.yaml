@@ -39,6 +39,7 @@ dependencies:
   flutter_svg:
   dio:
   flutter_dotenv:
+  flutter_secure_storage:
 
 dev_dependencies:
   flutter_test:
