@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () async {
                   await authProvider.logOut();
                   if (mounted) {
-                    Navigator.pushReplacementNamed(context, 'login');
+                    Navigator.pushReplacementNamed(context, 'LOGIN');
                   }
                 },
               )

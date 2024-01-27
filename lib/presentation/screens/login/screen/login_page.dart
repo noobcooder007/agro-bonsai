@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (mounted) {
                               if (response) {
                                 Navigator.of(context)
-                                    .pushReplacementNamed('home');
+                                    .pushReplacementNamed('HOME');
                               } else {
                                 showAdaptiveDialog(
                                   context: context,
