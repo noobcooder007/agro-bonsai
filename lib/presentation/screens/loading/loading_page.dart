@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:agro_bonsai/providers/providers.dart';
+import 'package:agro_bonsai/presentation/screens/screens.dart';
 
 class LoadingPage extends StatefulWidget {
+  static const name = 'LOADING';
   const LoadingPage({super.key});
 
   @override
@@ -33,9 +35,9 @@ class _LoadingPageState extends State<LoadingPage> {
     final authenticated = await authService.isLoggedIn();
     if (mounted) {
       if (authenticated) {
-        Navigator.pushReplacementNamed(context, 'HOME');
+        Navigator.pushReplacementNamed(context, HomePage.name);
       } else {
-        Navigator.pushReplacementNamed(context, 'LOGIN');
+        Navigator.pushReplacementNamed(context, LoginPage.name);
       }
     }
   }

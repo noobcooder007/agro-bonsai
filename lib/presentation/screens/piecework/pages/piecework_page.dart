@@ -3,22 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:agro_bonsai/shared/custom_list_tile.dart';
-import 'package:agro_bonsai/providers/employees/employee_provider.dart';
-import 'package:agro_bonsai/helpers/current_date.dart';
-import 'package:agro_bonsai/presentation/screens/piecework/widgets/add_piecework_form.dart';
-import 'package:agro_bonsai/providers/piecework/piecework_provider.dart';
 import 'package:agro_bonsai/shared/custom_form.dart';
+import 'package:agro_bonsai/helpers/current_date.dart';
+import 'package:agro_bonsai/shared/custom_list_tile.dart';
 import 'package:agro_bonsai/domain/entities/pieceworks.dart';
+import 'package:agro_bonsai/providers/employees/employee_provider.dart';
+import 'package:agro_bonsai/providers/piecework/piecework_provider.dart';
+import 'package:agro_bonsai/presentation/screens/piecework/widgets/add_piecework_form.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class PieceworkPage extends StatefulWidget {
+  static const name = 'REGISTER';
+  const PieceworkPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<PieceworkPage> createState() => _PieceworkPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _PieceworkPageState extends State<PieceworkPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

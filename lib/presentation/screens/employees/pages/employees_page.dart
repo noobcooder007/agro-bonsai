@@ -11,6 +11,7 @@ import 'package:agro_bonsai/domain/entities/employees.dart';
 import 'package:agro_bonsai/presentation/screens/employees/widgets/add_employee_form.dart';
 
 class EmployeesPage extends StatefulWidget {
+  static const name = 'EMPLOYEE';
   const EmployeesPage({super.key});
 
   @override

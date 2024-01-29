@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:agro_bonsai/shared/custom_dialog.dart';
 import 'package:agro_bonsai/providers/providers.dart';
+import 'package:agro_bonsai/shared/custom_dialog.dart';
+import 'package:agro_bonsai/presentation/screens/screens.dart';
 
 class LoginPage extends StatefulWidget {
+  static const name = 'LOGIN';
   const LoginPage({super.key});
 
   @override
@@ -100,8 +102,8 @@ class _LoginPageState extends State<LoginPage> {
                                 fcPassword: passwordTextController.text);
                             if (mounted) {
                               if (response) {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('HOME');
+                                Navigator.pushReplacementNamed(
+                                    context, HomePage.name);
                               } else {
                                 showAdaptiveDialog(
                                   context: context,

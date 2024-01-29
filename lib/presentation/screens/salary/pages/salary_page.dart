@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:agro_bonsai/shared/custom_list_tile.dart';
 
 class SalaryPage extends StatelessWidget {
+  static const name = 'SALARY';
   const SalaryPage({super.key});
 
   @override

@@ -8,6 +8,7 @@ import 'package:agro_bonsai/providers/log/log_provider.dart';
 import 'package:agro_bonsai/shared/custom_list_tile.dart';
 
 class LogsPage extends StatefulWidget {
+  static const name = 'LOGS';
   const LogsPage({super.key});
 
   @override

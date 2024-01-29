@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:agro_bonsai/providers/auth/auth_provider.dart';
 import '../../screens.dart';
+import 'package:agro_bonsai/providers/auth/auth_provider.dart';
+import 'package:agro_bonsai/presentation/screens/home/widgets/confirm_logout_dialog.dart';
 
 class HomePage extends StatefulWidget {
+  static const name = 'HOME';
   const HomePage({super.key});
 
   @override
@@ -16,6 +18,26 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
+    handleLogout() async {
+      final response = (await showDialog<bool>(
+          context: context,
+          builder: (context) => const ConfirmLogoutDialog()))!;
+      if (response) {
+        await authProvider.logOut();
+        if (mounted) {
+          Navigator.pushReplacementNamed(context, LoginPage.name);
+        }
+      }
+    }
+
+    handleClick(value) async {
+      switch (value) {
+        case 0:
+          await handleLogout();
+          break;
+      }
+    }
+
     return DefaultTabController(
         initialIndex: 1,
         length: 4,
@@ -23,15 +45,21 @@ class _HomePageState extends State<HomePage> {
           appBar: AppBar(
             title: const Text('Agro Bonsai'),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.logout_outlined),
-                onPressed: () async {
-                  await authProvider.logOut();
-                  if (mounted) {
-                    Navigator.pushReplacementNamed(context, 'LOGIN');
-                  }
-                },
-              )
+              PopupMenuButton<int>(
+                  onSelected: (value) async => handleClick(value),
+                  itemBuilder: (context) => [
+                        const PopupMenuItem(
+                            value: 0, child: Text('Cerrar sesión'))
+                      ])
+              // IconButton(
+              //   icon: const Icon(Icons.logout_outlined),
+              //   onPressed: () async {
+              //     await authProvider.logOut();
+              //     if (mounted) {
+              //       Navigator.pushReplacementNamed(context, 'LOGIN');
+              //     }
+              //   },
+              // )
             ],
             bottom: const TabBar(tabs: <Widget>[
               Tab(
@@ -50,7 +78,7 @@ class _HomePageState extends State<HomePage> {
           ),
           body: const TabBarView(children: <Widget>[
             LogsPage(),
-            RegisterPage(),
+            PieceworkPage(),
             EmployeesPage(),
             SalaryPage(),
           ]),
