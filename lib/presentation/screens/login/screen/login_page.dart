@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                         controller: passwordTextController,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
-                            label: Text('Password'),
+                            label: Text('Contraseña'),
                             hintText: 'Ingresa la contraseña'),
                         obscureText: true,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
