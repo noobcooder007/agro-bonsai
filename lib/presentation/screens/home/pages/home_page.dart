@@ -50,16 +50,7 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (context) => [
                         const PopupMenuItem(
                             value: 0, child: Text('Cerrar sesión'))
-                      ])
-              // IconButton(
-              //   icon: const Icon(Icons.logout_outlined),
-              //   onPressed: () async {
-              //     await authProvider.logOut();
-              //     if (mounted) {
-              //       Navigator.pushReplacementNamed(context, 'LOGIN');
-              //     }
-              //   },
-              // )
+                      ]),
             ],
             bottom: const TabBar(tabs: <Widget>[
               Tab(
