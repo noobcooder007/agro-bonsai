@@ -4,16 +4,20 @@ import 'package:agro_bonsai/domain/entities/employees.dart';
 import 'package:agro_bonsai/domain/repositories/employee_repository.dart';
 
 class EmployeeProvider with ChangeNotifier {
+  bool isLoading = false;
   final List<Employee> _employees = List.empty(growable: true);
   final EmployeeRepository _employeeRepository;
 
   EmployeeProvider({required EmployeeRepository employeeRepository})
       : _employeeRepository = employeeRepository;
 
-  Future<void> getEmployees(String token) async {
+  Future<bool> getEmployees(String token) async {
+    isLoading = !isLoading;
     final employees = await _employeeRepository.getEmployees(token);
     _employees.clear();
     _employees.addAll(employees);
+    isLoading = !isLoading;
+    return isLoading;
   }
 
   List<Employee> get employees {
@@ -24,8 +28,8 @@ class EmployeeProvider with ChangeNotifier {
     final response = await _employeeRepository.createEmployee(employee, token);
     if (response) {
       _employees.add(employee);
-      notifyListeners();
     }
+    notifyListeners();
     return response;
   }
 }
