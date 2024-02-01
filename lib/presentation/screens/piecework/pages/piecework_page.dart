@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:agro_bonsai/shared/custom_form.dart';
 import 'package:agro_bonsai/helpers/current_date.dart';
 import 'package:agro_bonsai/shared/custom_list_tile.dart';
+import 'package:agro_bonsai/shared/custom_modal_bottom_sheet_form.dart';
 import 'package:agro_bonsai/domain/entities/pieceworks.dart';
 import 'package:agro_bonsai/providers/employees/employee_provider.dart';
 import 'package:agro_bonsai/providers/piecework/piecework_provider.dart';
@@ -86,7 +86,7 @@ class _PieceworkPageState extends State<PieceworkPage> {
                             topLeft: Radius.circular(10.0),
                             topRight: Radius.circular(10.0))),
                     context: context,
-                    builder: (_) => CustomForm(
+                    builder: (_) => CustomModalBottomSheetForm(
                             child: AddPieceworkForm(
                           employees: employeeProvider.employees,
                           function: (Piecework piecework) =>

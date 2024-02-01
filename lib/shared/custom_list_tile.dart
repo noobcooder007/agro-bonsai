@@ -5,12 +5,14 @@ class CustomListTile extends StatelessWidget {
   final Widget title;
   final List<Widget> subtitle;
   final Widget trailing;
+  final Function()? function;
   const CustomListTile(
       {super.key,
       required this.leading,
       required this.trailing,
       required this.title,
-      required this.subtitle});
+      required this.subtitle,
+      this.function});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class CustomListTile extends StatelessWidget {
         ),
         isThreeLine: true,
         trailing: trailing,
-        onTap: () {},
+        onTap: function,
       ),
     );
   }

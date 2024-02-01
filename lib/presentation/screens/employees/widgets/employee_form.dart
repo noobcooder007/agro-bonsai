@@ -3,21 +3,39 @@ import 'package:flutter/material.dart';
 import 'package:agro_bonsai/shared/custom_dialog.dart';
 import 'package:agro_bonsai/domain/entities/employees.dart';
 
-class AddEmployeeForm extends StatefulWidget {
+class EmployeeForm extends StatefulWidget {
+  final Employee? employee;
   final Function(Employee) function;
 
-  const AddEmployeeForm({super.key, required this.function});
+  const EmployeeForm({super.key, required this.function, this.employee});
 
   @override
-  State<AddEmployeeForm> createState() => _AddEmployeeFormState();
+  State<EmployeeForm> createState() => _EmployeeFormState();
 }
 
-class _AddEmployeeFormState extends State<AddEmployeeForm> {
+class _EmployeeFormState extends State<EmployeeForm> {
   final _formKey = GlobalKey<FormState>();
   final firstNameTextController = TextEditingController();
   final firstLastnameTextController = TextEditingController();
   final secondLastnameTextController = TextEditingController();
-  DateTime birthday = DateTime.now();
+  int? employeeId;
+  bool employeeIsActive = true;
+  DateTime birthday = DateTime.now().toUtc();
+  DateTime createdAt = DateTime.now().toUtc();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.employee != null) {
+      firstNameTextController.text = widget.employee!.fcFirstname;
+      firstLastnameTextController.text = widget.employee!.fcFirstLastname;
+      secondLastnameTextController.text = widget.employee!.fcSecondLastname;
+      employeeId = widget.employee!.pkiId as int;
+      employeeIsActive = widget.employee!.fiIsActive;
+      birthday = widget.employee!.fdBirthday;
+      createdAt = widget.employee!.fdCreatedAt as DateTime;
+    }
+  }
 
   @override
   void dispose() {
@@ -105,19 +123,25 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
               errorInvalidText: 'Formato invalido',
               selectableDayPredicate: (day) => day.isBefore(DateTime.now()),
               errorFormatText: 'Formato invalido',
-              initialDate: DateTime.now(),
+              initialDate: birthday,
               keyboardType: TextInputType.datetime,
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
               onDateSaved: (value) {
-                birthday = DateTime.utc(value.year);
+                birthday = DateTime(value.year, value.month, value.day).toUtc();
               },
             ),
             const SizedBox(
               height: 20.0,
             ),
-            const SwitchListTile.adaptive(
-                value: true, title: Text('Activo'), onChanged: null),
+            SwitchListTile.adaptive(
+                value: employeeIsActive,
+                title: const Text('Activo'),
+                onChanged: (value) {
+                  setState(() {
+                    employeeIsActive = !employeeIsActive;
+                  });
+                }),
             const SizedBox(
               height: 20.0,
             ),
@@ -131,15 +155,15 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       final employee = Employee(
-                          pkiId: null,
+                          pkiId: employeeId,
                           fcFirstname: firstNameTextController.text.trim(),
                           fcFirstLastname:
                               firstLastnameTextController.text.trim(),
                           fcSecondLastname:
                               secondLastnameTextController.text.trim(),
                           fdBirthday: birthday,
-                          fdCreatedAt: DateTime.utc(DateTime.now().year),
-                          fiIsActive: true);
+                          fdCreatedAt: createdAt,
+                          fiIsActive: employeeIsActive);
                       final response = await widget.function(employee);
                       if (mounted) {
                         if (response) {
@@ -152,7 +176,7 @@ class _AddEmployeeFormState extends State<AddEmployeeForm> {
                               context: context,
                               builder: (context) => const CustomDialog(
                                   title: 'Error',
-                                  content: 'No se pudo crear el empleado'));
+                                  content: 'No se pudo guardar el empleado'));
                         }
                       }
                     }

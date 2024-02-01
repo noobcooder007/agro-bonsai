@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CustomForm extends StatefulWidget {
+class CustomModalBottomSheetForm extends StatefulWidget {
   final Widget child;
 
-  const CustomForm({super.key, required this.child});
+  const CustomModalBottomSheetForm({super.key, required this.child});
 
   @override
-  State<CustomForm> createState() => _CustomFormState();
+  State<CustomModalBottomSheetForm> createState() =>
+      _CustomModalBottomSheetFormState();
 }
 
-class _CustomFormState extends State<CustomForm> {
+class _CustomModalBottomSheetFormState
+    extends State<CustomModalBottomSheetForm> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(

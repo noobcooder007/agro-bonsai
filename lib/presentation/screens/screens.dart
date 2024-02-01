@@ -1,3 +1,4 @@
+export 'package:agro_bonsai/presentation/screens/employees/pages/employee_detail_page.dart';
 export 'package:agro_bonsai/presentation/screens/employees/pages/employees_page.dart';
 export 'package:agro_bonsai/presentation/screens/home/pages/home_page.dart';
 export 'package:agro_bonsai/presentation/screens/loading/loading_page.dart';

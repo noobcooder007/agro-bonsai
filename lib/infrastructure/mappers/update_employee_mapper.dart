@@ -1,7 +1,7 @@
 import 'package:agro_bonsai/domain/entities/employees.dart';
 import 'package:agro_bonsai/infrastructure/models/employees_response.dart';
 
-class EmployeesMapper {
+class UpdateEmployeesMapper {
   static List<Employee> employeeResponseToEmployeeEntity(
       EmployeesResponse employeeResponse) {
     return employeeResponse.employees
@@ -18,6 +18,7 @@ class EmployeesMapper {
 
   static Map<String, dynamic> toJson(Employee employee) {
     return {
+      'pkiId': employee.pkiId,
       'fcFirstname': employee.fcFirstname,
       'fcFirstLastname': employee.fcFirstLastname,
       'fcSecondLastname': employee.fcSecondLastname,

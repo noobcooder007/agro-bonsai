@@ -5,10 +5,11 @@ import 'package:flutter_svg/svg.dart';
 
 import 'package:agro_bonsai/providers/providers.dart';
 import 'package:agro_bonsai/helpers/calculate_difference.dart';
-import 'package:agro_bonsai/shared/custom_form.dart';
+import 'package:agro_bonsai/shared/custom_modal_bottom_sheet_form.dart';
 import 'package:agro_bonsai/shared/custom_list_tile.dart';
 import 'package:agro_bonsai/domain/entities/employees.dart';
-import 'package:agro_bonsai/presentation/screens/employees/widgets/add_employee_form.dart';
+import 'package:agro_bonsai/presentation/screens/screens.dart';
+import 'package:agro_bonsai/presentation/screens/employees/widgets/employee_form.dart';
 
 class EmployeesPage extends StatefulWidget {
   static const name = 'EMPLOYEE';
@@ -69,7 +70,15 @@ class _EmployeesPageState extends State<EmployeesPage> {
                                       Text(Utils.calculateDifference(
                                           employeesProvider
                                               .employees[index].fdCreatedAt!)),
-                                    ]),
+                                    ],
+                                    function: () {
+                                      Navigator.pushNamed(
+                                          context, EmployeeDetailPage.name,
+                                          arguments: {
+                                            'id': employeesProvider
+                                                .employees[index].pkiId
+                                          });
+                                    }),
                               ),
                             ),
                     ],
@@ -88,8 +97,8 @@ class _EmployeesPageState extends State<EmployeesPage> {
                                       topLeft: Radius.circular(10.0),
                                       topRight: Radius.circular(10.0))),
                               context: context,
-                              builder: (_) => CustomForm(
-                                      child: AddEmployeeForm(
+                              builder: (_) => CustomModalBottomSheetForm(
+                                      child: EmployeeForm(
                                     function: (Employee employee) =>
                                         employeesProvider.addEmployee(
                                             employee, authProvider.token),

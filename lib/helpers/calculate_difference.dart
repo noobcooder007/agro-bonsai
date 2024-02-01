@@ -8,7 +8,7 @@ class Utils {
     if (years.floor() == 0) {
       if (months.floor() == 0) {
         if (days.floor() == 0) {
-          return '';
+          return '1 día';
         } else {
           return '${days.floor()} día(s)';
         }

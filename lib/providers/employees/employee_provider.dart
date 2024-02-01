@@ -32,4 +32,13 @@ class EmployeeProvider with ChangeNotifier {
     notifyListeners();
     return response;
   }
+
+  Future<bool> updateEmployee(Employee employee, String token) async {
+    final response = await _employeeRepository.updateEmployee(employee, token);
+    if (response) {
+      _employees.add(employee);
+    }
+    notifyListeners();
+    return response;
+  }
 }
