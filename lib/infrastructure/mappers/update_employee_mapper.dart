@@ -23,7 +23,8 @@ class UpdateEmployeesMapper {
       'fcFirstLastname': employee.fcFirstLastname,
       'fcSecondLastname': employee.fcSecondLastname,
       'fdBirthday': employee.fdBirthday.toIso8601String(),
-      'fdCreatedAt': employee.fdCreatedAt?.toIso8601String()
+      'fdCreatedAt': employee.fdCreatedAt?.toIso8601String(),
+      'fiIsActive': employee.fiIsActive,
     };
   }
 }

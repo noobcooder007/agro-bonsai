@@ -20,8 +20,8 @@ class _EmployeeFormState extends State<EmployeeForm> {
   final secondLastnameTextController = TextEditingController();
   int? employeeId;
   bool employeeIsActive = true;
-  DateTime birthday = DateTime.now().toUtc();
-  DateTime createdAt = DateTime.now().toUtc();
+  DateTime birthday = DateTime.now();
+  DateTime createdAt = DateTime.now();
 
   @override
   void initState() {
@@ -55,7 +55,7 @@ class _EmployeeFormState extends State<EmployeeForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Añadir empleado',
+              'Añadir/Editar empleado',
               style: TextStyle(fontSize: 20.0),
             ),
             const SizedBox(
@@ -170,7 +170,8 @@ class _EmployeeFormState extends State<EmployeeForm> {
                           Navigator.of(context).pop();
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                  content: Text('Empleado añadido con exito')));
+                                  content:
+                                      Text('Empleado guardado con exito')));
                         } else {
                           showDialog(
                               context: context,

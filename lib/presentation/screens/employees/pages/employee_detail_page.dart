@@ -24,9 +24,7 @@ class _EmployeeDetailPageState extends State<EmployeeDetailPage> {
     final employee =
         employeeProvider.employees.firstWhere((e) => e.pkiId == employeeId);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Editar empleado'),
-      ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: EmployeeForm(
             function: (Employee employee) =>
